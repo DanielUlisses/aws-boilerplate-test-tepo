@@ -1,0 +1,33 @@
+# Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the
+# working directory, into a temporary folder, and execute your Terraform commands in that folder.
+
+# Include all settings from the root terragrunt.hcl file
+include {
+  path = find_in_parent_folders("build_terragrunt.hcl")
+}
+
+# Resource groups should not be destroyed without careful consideration of effects
+prevent_destroy = true
+
+locals {
+  env      = yamldecode(file(find_in_parent_folders("env.yaml")))
+  inputs   = yamldecode(file("inputs.yaml"))
+  platform = yamldecode(file(find_in_parent_folders("aws.yaml")))
+  region   = yamldecode(file(find_in_parent_folders("region.yaml")))
+  version  = yamldecode(file(find_in_parent_folders("module_versions.yaml")))
+}
+
+terraform {
+  source = "${format("tfr:///terraform-aws-modules/dynamodb-table/aws?version=%s", local.version.terraform_aws_modules_dynamodb_table)}"
+}
+
+inputs = {
+  name = coalesce(local.inputs.name_override, format("%s%s%s", local.platform.prefix, local.env.environment, local.inputs.name))
+  hash_key = local.inputs.hash_key
+  attributes = [
+    {
+      name = local.inputs.hash_key
+      type = local.inputs.hash_key_type
+    }
+  ]
+}

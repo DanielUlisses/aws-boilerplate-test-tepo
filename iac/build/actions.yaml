@@ -1,0 +1,55 @@
+name: Configure And Deploy
+on:
+  push:
+     branches:
+       - main
+  pull_request:
+     branches:
+       - main
+
+jobs:
+  deploy-prod-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Setup Terraform 1.3.9
+        uses: hashicorp/setup-Terraform@v1
+        with:
+          terraform_version: 1.3.9
+          terraform_wrapper: true
+
+      - name: Setup Terraform version
+        run: terraform --version
+
+      - name: Setup Terraform wrapper path
+        run: which terraform
+
+      - name: Setup Terragrunt 0.45.4
+        run: |
+          sudo wget -q -O /bin/terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v0.45.4/terragrunt_linux_amd64"
+          sudo chmod +x /bin/terragrunt
+          terragrunt -v
+
+      - name: Setup go 1.19.4
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.19.4
+
+      - name: Configure prod environment
+        run: ${PWD}/iac/terragrunt/make prod_config
+
+      - name: Deploy prod build zone
+        run: ${PWD}/iac/terragrunt/make prod_build
+
+      - name: Deploy prod dataprocess zone
+        run: ${PWD}/iac/terragrunt/make prod_dataprocess
+
+      - name: Deploy prod datawarehouse zone
+        run: ${PWD}/iac/terragrunt/make prod_datawarehouse

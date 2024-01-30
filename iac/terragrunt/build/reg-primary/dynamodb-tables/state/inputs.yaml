@@ -1,0 +1,5 @@
+---
+hash_key: "LockID"
+hash_key_type: "S"
+name: "tfstate"
+name_override: ""

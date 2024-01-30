@@ -1,0 +1,7 @@
+---
+acl: "private"
+control_object_ownership: true
+name: "tfstate"
+name_override: ""
+object_ownership: "ObjectWriter"
+versioning: true

@@ -1,0 +1,7 @@
+---
+acl: "private"
+control_object_ownership: true
+name: "dataprocess"
+name_override: ""
+object_ownership: "ObjectWriter"
+versioning: true
