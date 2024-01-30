@@ -53,12 +53,12 @@ jobs:
           cd iac/terragrunt
           make prod_build
 
-      - name: Deploy prod dataprocess zone
-        run: |
-          cd iac/terragrunt
-          make prod_dataprocess
+      # - name: Deploy prod dataprocess zone
+      #   run: |
+      #     cd iac/terragrunt
+      #     make prod_dataprocess
 
-      - name: Deploy prod datawarehouse zone
-        run: |
-          cd iac/terragrunt
-          make prod_datawarehouse
+      # - name: Deploy prod datawarehouse zone
+      #   run: |
+      #     cd iac/terragrunt
+      #     make prod_datawarehouse
