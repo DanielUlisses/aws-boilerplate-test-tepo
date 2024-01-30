@@ -45,7 +45,9 @@ jobs:
           go-version: 1.19.4
 
       - name: Configure prod environment
-        run: iac/terragrunt/make prod_config
+        run: | 
+          ls
+          iac/terragrunt/make prod_config
 
       - name: Deploy prod build zone
         run: iac/terragrunt/make prod_build
