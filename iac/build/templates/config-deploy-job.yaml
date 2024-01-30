@@ -1,6 +1,7 @@
 jobs:
   deploy-ENVIRONMENT-environment:
     runs-on: ubuntu-latest
+    environment: ENVIRONMENT
     CONDITION
     steps:
       - uses: actions/checkout@v3
