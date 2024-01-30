@@ -37,7 +37,6 @@ jobs:
         run: |
           sudo wget -q -O /bin/terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v0.45.4/terragrunt_linux_amd64"
           sudo chmod +x /bin/terragrunt
-          terragrunt -v
 
       - name: Setup go 1.19.4
         uses: actions/setup-go@v5
@@ -51,7 +50,8 @@ jobs:
 
       - name: Deploy prod build zone
         run: |
-          cd iac/terragrunt iac/terragrunt/make prod_build
+          cd iac/terragrunt
+          make prod_build
 
       - name: Deploy prod dataprocess zone
         run: |
