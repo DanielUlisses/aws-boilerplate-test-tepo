@@ -90,7 +90,7 @@ echo ""
 
 if [ "${CLEAN}" == "true" ]; then
   echo "Cleaning up existing environments..."
-  cp templates/actions.yaml actions.yaml
+  cp templates/actions.yaml ../../.github/workflows/actions.yaml
 
 fi
 
@@ -111,6 +111,6 @@ for ENVIRONMENT in "${ENVIRONMENTS[@]}"; do
   sed -i -e "s:TF_VERSION:${TF_VERSION}:g" config-deploy-job-${ENVIRONMENT}.yaml
   sed -i -e "s:TG_VERSION:${TG_VERSION}:g" config-deploy-job-${ENVIRONMENT}.yaml
   [[ -z ${TAG_PATTERN} ]] && sed -i "/CONDITION/d" config-deploy-job-${ENVIRONMENT}.yaml || sed -i -e "s|CONDITION|${CONDITION}|g" config-deploy-job-${ENVIRONMENT}.yaml
-  cat config-deploy-job-${ENVIRONMENT}.yaml >> actions.yaml
+  cat config-deploy-job-${ENVIRONMENT}.yaml >> ../../.github/workflows/actions.yaml
 
 done
