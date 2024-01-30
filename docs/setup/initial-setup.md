@@ -6,6 +6,7 @@
 1. rename the file `remotestate.tf` to `remotestate.t_`
 1. execute a `terragrunt init`
 1. execute a `terragrunt apply`
+1. record the key arn output to be used later
 1. navigate to the folder `iac/terragrunt/build/reg-primary/s3-buckets/state`
 1. rename the file `remotestate.tf` to `remotestate.t_`
 1. execute a `terragrunt init`
@@ -15,6 +16,7 @@
 1. execute a `terragrunt init`
 1. execute a `terragrunt apply`
 1. uncomment the remote state block and rollback the file name change to `remotestate.tf` on both folders
+1. add the kms key arn on the 'kms_key_id' parameter for all the files `*_terragrunt.hcl` on the root folder
 1. run a `terragrunt init --reconfigure` command on all folders
 1. confirm the changes on the s3 bucket
 1. starting here all zones can be deployed running the commands from the Makefile

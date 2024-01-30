@@ -4,6 +4,8 @@ remote_state {
   config = {
     bucket         = format("%s%stfstate", local.platform.prefix, local.env.environment)
     dynamodb_table = format("%s%stfstate", local.platform.prefix, local.env.environment)
+    encrypt        = true
+    kms_key_id     = "arn:aws:kms:us-east-1:555091451601:key/9fd6fdf9-4dbf-4820-8852-1137c1f0c3aa"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = local.region.region
   }

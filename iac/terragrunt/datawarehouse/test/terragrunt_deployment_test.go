@@ -26,9 +26,9 @@ func TestTerragruntDeployment(t *testing.T) {
 	moddirs := make(map[string]string)
 
 	// Non-local vars to evaluate state between modules
-	var buildGroup string
-	var buildRegistry string
-	var stateStorage string
+	// var buildGroup string
+	// var buildRegistry string
+	// var stateStorage string
 
 	// Reusable vars for unmarshalling YAML files
 	var err error
