@@ -193,7 +193,7 @@ func TestTerragruntDeployment(t *testing.T) {
 		assert.Contains(t, hclstring, "path = find_in_parent_folders(\"build_terragrunt.hcl\")")
 
 		// Collect the outputs
-		outputs := terraform.OutputAll(t, terraformOptions)
+		// outputs := terraform.OutputAll(t, terraformOptions)
 
 		// Add module-specific tests below
 		// Remember that we're in a loop, so group tests by module name (modules range keys)
